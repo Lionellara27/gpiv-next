@@ -1,5 +1,15 @@
 package com.unrn.gpiv.controller;
 
+// El DTO nuevo que armamos
+import com.unrn.gpiv.dto.MenuResponseDTO;
+
+// Los modelos que usaste adentro del método getMenuData
+import com.unrn.gpiv.model.Empresa;
+import com.unrn.gpiv.model.SolicitudRadicacion;
+
+// El Enum para el estado (verificá si lo tenés en common o en model)
+import com.unrn.gpiv.common.EstadoSolicitud;
+
 import com.unrn.gpiv.dto.LoginRequestDTO;
 import com.unrn.gpiv.dto.LoginResponseDTO;
 import com.unrn.gpiv.service.EmpresaService;
@@ -42,5 +52,38 @@ public class AuthController {
                     .status(HttpStatus.UNAUTHORIZED) // HTTP 401
                     .body(Map.of("message", "Usuario o contraseña incorrectos"));
         }
+    }
+
+    @GetMapping("/menu/{usuarioId}")
+    // TODO: A futuro, sacaremos el ID directamente del Token JWT en vez de la URL
+    public ResponseEntity<MenuResponseDTO> getMenuData(@PathVariable Long usuarioId) {
+
+        // 1. Buscás el usuario en la BD (asumo que tenés un metodo similar)
+        Usuario usuario = empresaService.buscarUsuarioPorId(usuarioId);
+
+        if (usuario.getRol().name().equals("ADMIN")) {
+            return ResponseEntity.ok(new MenuResponseDTO("ADMIN", false, false));
+        }
+
+        // 2. Lógica para la EMPRESA
+        boolean solicitudAprobada = false;
+        boolean tieneLotes = false;
+
+        try {
+            // Reutilizás tus métodos de Vaadin
+            SolicitudRadicacion solicitud = empresaService.obtenerUltimaSolicitud(usuario);
+            if (solicitud != null && solicitud.getEstado() == EstadoSolicitud.APROBADA) {
+                solicitudAprobada = true;
+            }
+
+            Empresa empresa = empresaService.obtenerEmpresaPorRepresentante(usuario);
+            if (empresa != null && !empresa.getLotesAsignados().isEmpty()) {
+                tieneLotes = true;
+            }
+        } catch (Exception e) {
+            // Manejo por si no tiene solicitud o empresa aún
+        }
+
+        return ResponseEntity.ok(new MenuResponseDTO("EMPRESA", solicitudAprobada, tieneLotes));
     }
 }
