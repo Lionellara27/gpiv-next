@@ -1,13 +1,9 @@
 package com.unrn.gpiv.service;
 
 import com.unrn.gpiv.common.EstadoEmpresa;
-import com.unrn.gpiv.common.EstadoLote;
-import com.unrn.gpiv.common.EstadoMovimientoRecurso;
 import com.unrn.gpiv.common.EstadoSolicitud;
-import com.unrn.gpiv.messaging.service.EmailService;
 import com.unrn.gpiv.model.*;
 import com.unrn.gpiv.repository.*;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

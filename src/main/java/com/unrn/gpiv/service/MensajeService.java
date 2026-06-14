@@ -1,7 +1,7 @@
-package com.unrn.gpiv.messaging.service;
+package com.unrn.gpiv.service;
 
-import com.unrn.gpiv.messaging.model.Mensaje;
-import com.unrn.gpiv.messaging.repository.MensajeRepository;
+import com.unrn.gpiv.model.Mensaje;
+import com.unrn.gpiv.repository.MensajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

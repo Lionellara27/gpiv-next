@@ -1,6 +1,6 @@
-package com.unrn.gpiv.messaging.repository;
+package com.unrn.gpiv.repository;
 
-import com.unrn.gpiv.messaging.model.Mensaje;
+import com.unrn.gpiv.model.Mensaje;
 import com.unrn.gpiv.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

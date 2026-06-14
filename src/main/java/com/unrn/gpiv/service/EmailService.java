@@ -1,4 +1,4 @@
-package com.unrn.gpiv.messaging.service;
+package com.unrn.gpiv.service;
 
 import com.unrn.gpiv.model.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;

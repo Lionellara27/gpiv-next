@@ -1,6 +1,5 @@
-package com.unrn.gpiv.messaging.model;
+package com.unrn.gpiv.model;
 
-import com.unrn.gpiv.model.Usuario; // Referencia al modelo core
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
